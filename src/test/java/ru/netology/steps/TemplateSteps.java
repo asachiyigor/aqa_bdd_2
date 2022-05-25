@@ -25,13 +25,13 @@ public class TemplateSteps {
 
     @Когда("пользователь переводит {string} рублей с карты с номером {string} на свою \"{int}\" карту с главной страницы")
     public void transferMoneyToOwnCard(String amount, String string2, int cardId) {
-        int FirstCardBalance = DashboardPage.getFirstCardBalance();
-        int SecondCardBalance = DashboardPage.getSecondCardBalance();
-        var TransferPage = DashboardPage.firstCard();
+        int firstCardBalance = DashboardPage.getFirstCardBalance();
+        int secondCardBalance = DashboardPage.getSecondCardBalance();
+        var transferPage = DashboardPage.firstCard();
         String string3 = string2.replace(" ","");
-        TransferPage.transferCard(new Data.CardInfo(string3), Integer.parseInt(amount));
-        Data.increaseBalance(FirstCardBalance, Integer.parseInt(amount));
-        Data.decreaseBalance(SecondCardBalance, Integer.parseInt(amount));
+        transferPage.transferCard(new Data.CardInfo(string3), Integer.parseInt(amount));
+        Data.increaseBalance(firstCardBalance, Integer.parseInt(amount));
+        Data.decreaseBalance(secondCardBalance, Integer.parseInt(amount));
         DashboardPage.getFirstCardBalance();
         DashboardPage.getSecondCardBalance();
     }
