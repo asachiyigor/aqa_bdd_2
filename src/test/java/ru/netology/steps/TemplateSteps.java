@@ -1,8 +1,8 @@
 package ru.netology.steps;
 
-import io.cucumber.java.ru.РљРѕРіРґР°;
-import io.cucumber.java.ru.РџСѓСЃС‚СЊ;
-import io.cucumber.java.ru.РўРѕРіРґР°;
+import io.cucumber.java.ru.Когда;
+import io.cucumber.java.ru.Пусть;
+import io.cucumber.java.ru.Тогда;
 import lombok.val;
 import ru.netology.data.Data;
 import ru.netology.page.DashboardPage;
@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TemplateSteps {
 
-    @РџСѓСЃС‚СЊ("РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ Р·Р°Р»РѕРіРёРЅРµРЅ СЃ РёРјРµРЅРµРј {string} Рё РїР°СЂРѕР»РµРј {string}")
+    @Пусть("пользователь залогинен с именем {string} и паролем {string}")
     public void loginWithNameAndPasswordAndVerify(String string, String string2) {
         open("http://localhost:9999", LoginPage.class);
         val loginPage = new LoginPage();
@@ -23,7 +23,7 @@ public class TemplateSteps {
         verificationPage.validVerify(verificationCode);
     }
 
-    @РљРѕРіРґР°("РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ РїРµСЂРµРІРѕРґРёС‚ {string} СЂСѓР±Р»РµР№ СЃ РєР°СЂС‚С‹ СЃ РЅРѕРјРµСЂРѕРј {string} РЅР° СЃРІРѕСЋ \"{int}\" РєР°СЂС‚Сѓ СЃ РіР»Р°РІРЅРѕР№ СЃС‚СЂР°РЅРёС†С‹")
+    @Когда("пользователь переводит {string} рублей с карты с номером {string} на свою \"{int}\" карту с главной страницы")
     public void transferMoneyToOwnCard(String amount, String string2, int cardId) {
         int firstCardBalance = DashboardPage.getFirstCardBalance();
         int secondCardBalance = DashboardPage.getSecondCardBalance();
@@ -36,7 +36,7 @@ public class TemplateSteps {
         DashboardPage.getSecondCardBalance();
     }
 
-    @РўРѕРіРґР°("Р±Р°Р»Р°РЅСЃ РµРіРѕ \"{int}\" РєР°СЂС‚С‹ РёР· СЃРїРёСЃРєР° РЅР° РіР»Р°РІРЅРѕР№ СЃС‚СЂР°РЅРёС†Рµ РґРѕР»Р¶РµРЅ СЃС‚Р°С‚СЊ {string} СЂСѓР±Р»РµР№")
+    @Тогда("баланс его \"{int}\" карты из списка на главной странице должен стать {string} рублей")
     public void verify(int cardId, String string2) {
         int firstBalance = DashboardPage.getFirstCardBalance();
         assertEquals(firstBalance, Integer.parseInt(string2));
